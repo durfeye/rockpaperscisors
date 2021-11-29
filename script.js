@@ -1,5 +1,14 @@
+let actualPlayerScore = document.querySelector('.actualPlayersScore');
+let actualComputerScore = document.querySelector('.actualComputersScore');
+let weaponRock = document.querySelector('.rock');
+let weaponPaper = document.querySelector('.paper');
+let weaponScissors = document.querySelector('.scissors');
+let whoWon = document.querySelector('#whoWon');
+let restartButton = document.querySelector('.restartButton');
+
 let playerScore = 0;
 let computerScore = 0;
+let playerChoice = '';
 
 // computer randomly selects one option
 function computerPlay() {
@@ -8,69 +17,74 @@ function computerPlay() {
     return computerChoices[getComputerChoice];
 }
 
-// one round play
+// player selects one option by clicking button
 
+weaponRock.addEventListener('click', () => startGame('rock'));
+weaponPaper.addEventListener('click', () => startGame('paper'));
+weaponScissors.addEventListener('click', () => startGame('scissors'));
 
-function playRound(playerSelection, computerSelection) {
-    playerSelection = prompt("Enter your choice", "");
-    playerSelection = playerSelection.toLowerCase();
+function startGame(playerChoice) {
+
+    playerSelection = playerChoice;
     computerSelection = computerPlay();
 
-    console.log(`Player selected "${playerSelection}"`);
-    console.log(`Computer selected "${computerSelection}"`);
+    game(playerSelection, computerSelection);
 
-    if (playerSelection === computerSelection) {
-        console.log("Same symbol, game tied!");
-        playerScore++;
-        computerScore++;
-        console.log(`Player: ${playerScore}, Computer: ${computerScore}`);
-    }
-    else if (playerSelection === 'rock') {
-        if (computerSelection === 'scissors') {
-            console.log("Computer's choice is Scissors, Player won!");
-            playerScore++;
-            console.log(`Player: ${playerScore}, Computer: ${computerScore}`);
-        }
-        else {
-            console.log("Computer's choice is Paper, Computer won!");
-            computerScore++;
-            console.log(`Player: ${playerScore}, Computer: ${computerScore}`);
-        }
-    }
-    else if (playerSelection === 'paper') {
-        if (computerSelection === 'rock') {
-            console.log("Computer's choice is Rock, Player won!");
-            playerScore++;
-            console.log(`Player: ${playerScore}, Computer: ${computerScore}`);
-        }
-        else {
-            console.log("Computer's choice is Scissors, Computer won!");
-            computerScore++;
-            console.log(`Player: ${playerScore}, Computer: ${computerScore}`);
-        }
-    }
-    else if (playerSelection === 'scissors') {
-        if (computerSelection === 'paper') {
-            console.log("Computer's choice is Paper, Player won!");
-            playerScore++;
-            console.log(`Player: ${playerScore}, Computer: ${computerScore}`);
-        }
-        else {
-            console.log("Computer's choice is Rock, Computer won!");
-            computerScore++;
-            console.log(`Player: ${playerScore}, Computer: ${computerScore}`);
-        }
-    }
+    actualPlayerScore.textContent = playerScore;
+    actualComputerScore.textContent = computerScore;
+
 }
 
 function game() {
 
-    playRound();
+    if (playerSelection === computerSelection) {
+        playerScore++;
+        computerScore++;
+        whoWon.textContent = "Same symbol, round tied!";
+    }
+    else if (playerSelection === 'rock') {
+        if (computerSelection === 'scissors') {
+            playerScore++;
+            whoWon.textContent = "Computer's choice is Scissors, Player won!";
+        }
+        else {
+            computerScore++;
+            whoWon.textContent = "Computer's choice is Paper, Computer won!";
+        }
+    }
+    else if (playerSelection === 'paper') {
+        if (computerSelection === 'rock') {
+            playerScore++;
+            whoWon.textContent = "Computer's choice is Rock, Player won!";
+        }
+        else {
+            computerScore++;
+            whoWon.textContent = "Computer's choice is Scissors, Computer won!";
+        }
+    }
+    else if (playerSelection === 'scissors') {
+        if (computerSelection === 'paper') {
+            playerScore++;
+            whoWon.textContent = "Computer's choice is Paper, Player won!";
+        }
+        else {
+            computerScore++;
+            whoWon.textContent = "Computer's choice is Rock, Computer won!";
+        }
+    }
 
     if (playerScore == 5) {
-        console.log("YOU WON!");
+        whoWon.textContent = "YOU WON THE WHOLE GAME!";
+        restartButton.setAttribute('style', 'display: block');
+        return;
     }
     else if (computerScore == 5) {
-        console.log("COMPUTER WON!");
+        whoWon.textContent = "COMPUTER WON!";
+        restartButton.setAttribute('style', 'display: block');
+        return;
     }
+}
+
+function gameOver() {
+    
 }
