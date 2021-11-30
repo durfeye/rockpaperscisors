@@ -1,3 +1,4 @@
+// declaring divs
 let actualPlayerScore = document.querySelector('.actualPlayersScore');
 let actualComputerScore = document.querySelector('.actualComputersScore');
 let weaponRock = document.querySelector('.rock');
@@ -6,6 +7,7 @@ let weaponScissors = document.querySelector('.scissors');
 let whoWon = document.querySelector('#whoWon');
 let restartButton = document.querySelector('.restartButton');
 
+//declaring start values
 let playerScore = 0;
 let computerScore = 0;
 let playerChoice = '';
@@ -18,11 +20,14 @@ function computerPlay() {
 }
 
 // player selects one option by clicking button
-
 weaponRock.addEventListener('click', () => startGame('rock'));
 weaponPaper.addEventListener('click', () => startGame('paper'));
 weaponScissors.addEventListener('click', () => startGame('scissors'));
 
+// restartgame function button
+restartButton.addEventListener('click', () => restartGame());
+
+// function which start game after weapon choose
 function startGame(playerChoice) {
 
     playerSelection = playerChoice;
@@ -32,14 +37,29 @@ function startGame(playerChoice) {
 
     actualPlayerScore.textContent = playerScore;
     actualComputerScore.textContent = computerScore;
-
 }
 
+// end game and declare winner
+function gameOver() {
+
+    weaponRock.disabled = true;
+    weaponPaper.disabled = true;
+    weaponScissors.disabled = true;
+
+    if (playerScore == 5) {
+        whoWon.textContent = "YOU WON THE WHOLE GAME!";
+        restartButton.setAttribute('style', 'display: block');
+    }
+    else if (computerScore == 5) {
+        whoWon.textContent = "COMPUTER WON!";
+        restartButton.setAttribute('style', 'display: block');
+    }
+}
+
+// whole game process
 function game() {
 
     if (playerSelection === computerSelection) {
-        playerScore++;
-        computerScore++;
         whoWon.textContent = "Same symbol, round tied!";
     }
     else if (playerSelection === 'rock') {
@@ -72,19 +92,21 @@ function game() {
             whoWon.textContent = "Computer's choice is Rock, Computer won!";
         }
     }
-
-    if (playerScore == 5) {
-        whoWon.textContent = "YOU WON THE WHOLE GAME!";
-        restartButton.setAttribute('style', 'display: block');
-        return;
-    }
-    else if (computerScore == 5) {
-        whoWon.textContent = "COMPUTER WON!";
-        restartButton.setAttribute('style', 'display: block');
-        return;
+    if (playerScore == 5 || computerScore == 5) {
+        gameOver(); 
     }
 }
 
-function gameOver() {
-    
+// restarting game (values etc) after restart button click
+function restartGame () {
+
+    playerScore = 0;
+    computerScore = 0;
+    actualPlayerScore.textContent = playerScore;
+    actualComputerScore.textContent = computerScore;
+    weaponRock.disabled = false;
+    weaponPaper.disabled = false;
+    weaponScissors.disabled = false;
+    restartButton.setAttribute('style', 'display: none');
+    whoWon.textContent = "";
 }

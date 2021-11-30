@@ -9,43 +9,55 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    background: navy;
+    background: #ff33cc;
+    font-family: 'Courier New', monospace;
+    
 }
 #scoreBoard{
     display: flex;
     color: white;
-    padding: 2em 1em 2em 1em;
+    padding: 1em 1em 2em 1em;
     justify-content: center;
     text-align: center;
     gap: 3em;
     font-size: 2em;
     flex-wrap: wrap;
 }
-
 #chooseWeapon {
     display: flex;
     gap: 2em;
 }
 #chooseWeapon button {
-    height: 8em;
-    width: 8em;
+    height: 7em;
+    width: 7em;
+    font-weight: bold;
+    background: #3399ff;
+    border: 1px solid #99ccff;
+    color: white;
 }
 #infoAboutWinner {
     display: flex;
     flex-direction: column;
     color: white;
-    padding: 5em 0 3em 0;
+    padding: 3em 0 3em 0;
     gap: 2em;
 }
 #whoWon {
     font-size: 1.5em;
+    text-align: center;
 }
 .restartButton{
     display: none;
+    height: 6em;
+    width: 10em;
+    font-weight: bold;
+    background: #3399ff;
+    border: 1px solid #99ccff;
+    color: white;
 }
-footer {
+/* footer {
     display: flex;
     color: white;
     height: 100px;
     font-weight: bold;;
-}
+} */
