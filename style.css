@@ -30,10 +30,15 @@ body {
 #chooseWeapon button {
     height: 7em;
     width: 7em;
-    font-weight: bold;
     background: #3399ff;
-    border: 1px solid #99ccff;
+    border:0;
     color: white;
+}
+#chooseWeapon button:active {
+    background: #0073e6;
+}
+#chooseWeapon button i{
+    font-size: 4em;
 }
 #infoAboutWinner {
     display: flex;
@@ -52,8 +57,11 @@ body {
     width: 10em;
     font-weight: bold;
     background: #3399ff;
-    border: 1px solid #99ccff;
+    border: 0;
     color: white;
+}
+.restartButton:active {
+    background: #0073e6;
 }
 /* footer {
     display: flex;
